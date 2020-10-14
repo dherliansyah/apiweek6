@@ -1,3 +1,5 @@
+<h1 align="center">Zwallet</h1>
+
 <p align="center"><b>Aplikasi dompet digital</b></p>
 <p align="center"><b>Apapun pengeluarannya Zwallet in aja!</b></p>
 <p align="center"><b>#zwalletaja</b></p>
