@@ -1,5 +1,4 @@
 const authModel = require("../Model/Auth");
-const jwt = require("jsonwebtoken");
 
 module.exports = {
   posthUser: (req, res) => {
@@ -35,7 +34,7 @@ module.exports = {
       .catch((err) => {
         res.status(400).send({
           success: false,
-          message: "Failed Login",
+          message: "Email / Password Salah",
         });
       });
   },

@@ -28,12 +28,12 @@ const authModel = {
 
   loginhUser: (body) => {
     return new Promise((resolve, reject) => {
-      const { email } = body;
+      const { email, password } = body;
       const query = "SELECT * FROM user WHERE email=?";
       db.query(query, email, (err, dataLogin) => {
         let data = dataLogin[0];
         if (dataLogin.length < 1) {
-          console.log("Email / Password Salah");
+          reject();
         } else {
           if (!err) {
             const token = jwt.sign(
@@ -44,9 +44,28 @@ const authModel = {
               },
               process.env.DATA_KEY
             );
-            resolve(token);
+            
+            bcrypt.compare(password, data.password, (err, result)=>{
+              if(err){
+                reject()
+              }else{
+                if(!result){
+                  reject()
+                }else{
+                  const sql = "SELECT * FROM user WHERE password=?";
+                  db.query(sql, data.password, (err)=>{
+                    if(!err){
+                      resolve(token)
+                    } else{
+                      reject()
+                    }
+                  })
+                }
+              }
+            })
+
           } else {
-            reject(err);
+            reject();
           }
         }
       });

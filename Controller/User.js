@@ -1,5 +1,4 @@
 const userModel = require("../Model/User");
-const jwt = require("jsonwebtoken");
 
 module.exports = {
   getAllUsers: (req, res) => {
@@ -20,9 +19,28 @@ module.exports = {
       });
   },
 
-  posthUser: (req, res) => {
+  getUser: (req, res) => {
+    const { idUser } = req.params;
     userModel
-      .posthUser(req.body)
+      .getUser(req.body, idUser)
+      .then((data) => {
+        res.status(200).send({
+          success: true,
+          message: "Succes Get By ID",
+          data: data,
+        });
+      })
+      .catch((err) => {
+        res.status(400).send({
+          success: false,
+          message: "Failed Get Data User",
+        });
+      });
+  },
+
+  postUser: (req, res) => {
+    userModel
+      .postUser(req.body)
       .then((data) => {
         res.status(201).send({
           success: true,
@@ -33,7 +51,7 @@ module.exports = {
       .catch((err) => {
         res.status(400).send({
           success: false,
-          message: "Failed Create Data USer",
+          message: "Failed Create Data User",
         });
       });
   },
@@ -75,23 +93,22 @@ module.exports = {
       });
   },
 
-  loginUser: (req, res) => {
-    // const token = jwt.sign(req.body, process.env.DATA_KEY)
-    // res.send(token)
+  paginationUser: (req,res)=>{
+    let {page, limit} = req.query
     userModel
-      .loginhUser(req.body)
-      .then((dataLogin) => {
-        res.status(201).send({
-          success: true,
-          message: "Success Login",
-          data: dataLogin,
-        });
+    .paginationUser(req.body, page,limit)
+    .then((data)=>{
+      res.status(200).send({
+        success : true,
+        message : "Success Pagination Data User",
+        data : data,
       })
-      .catch((err) => {
+    })
+      .catch((err)=>{
         res.status(400).send({
-          success: false,
-          message: "Failed Login",
-        });
-      });
+          success : false,
+          message : "Failed Pagination Data User",
+        })
+      })
   },
 };
