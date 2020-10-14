@@ -38,9 +38,8 @@ const authModel = {
           if (!err) {
             const token = jwt.sign(
               {
-                email: data.email,
+                role : data.role,
                 idUser: data.idUser,
-                username: data.username,
               },
               process.env.DATA_KEY
             );

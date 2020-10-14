@@ -5,7 +5,7 @@ module.exports = {
     userModel
       .getAllUsers()
       .then((data) => {
-        res.status(201).send({
+        res.status(200).send({
           success: true,
           message: "Success Get Data User",
           data: data,
@@ -42,7 +42,7 @@ module.exports = {
     userModel
       .postUser(req.body)
       .then((data) => {
-        res.status(201).send({
+        res.status(200).send({
           success: true,
           message: "Success Create Data User",
           data: data,
@@ -61,7 +61,7 @@ module.exports = {
     userModel
       .puthUser(req.body, idUser)
       .then((data) => {
-        res.status(201).send({
+        res.status(200).send({
           success: true,
           message: "Success Update Data User",
           data: data,
@@ -79,7 +79,7 @@ module.exports = {
     userModel
       .deletehUser(req.params.idUser)
       .then((data) => {
-        res.status(201).send({
+        res.status(200).send({
           success: true,
           message: "Success Delete Data User",
           data: data,

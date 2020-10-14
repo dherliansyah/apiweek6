@@ -5,7 +5,7 @@ module.exports = {
         transferModel
         .getAllTransfer()
         .then((data) => {
-          res.status(201).send({
+          res.status(200).send({
             success: true,
             message: "Success Get Data Transfer",
             data: data,
@@ -23,7 +23,7 @@ module.exports = {
         transferModel
         .postTransfer(req.body)
         .then((data) => {
-          res.status(201).send({
+          res.status(200).send({
             success: true,
             message: "Success Create Data Transfer",
             data: data,
