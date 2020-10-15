@@ -16,7 +16,7 @@ Saya sedang membuat project minggu ke enam yaitu membuat API untuk webiste <b><i
   
 2. JWT        : Sebuah token yang berguna untuk melakukan sistem autentikasi atau pertukaran informasi
 
-3. CORS       : Protokol yang dibangun di atas HTTP untuk memungkinkan javascript pada halaman yang berasal dari satu situs untuk mengakses metode di situs lain
+3. CORS       : Cross-origin resource sharing Protokol yang dibangun di atas HTTP untuk memungkinkan javascript pada halaman yang berasal dari satu situs untuk mengakses metode di situs lain
 
 4. Multer     : Dependencies node.js yang berguna untuk menangani multipart/form data, yang biasanya digunakan untuk mengunggah foto / file
 
