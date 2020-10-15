@@ -14,7 +14,7 @@ Saya sedang membuat project minggu ke enam yaitu membuat API untuk webiste <b><i
 1. Otentikasi : Proses verifikasi siapa yang akses ( Login )
    Otorisasi  : Proses verifikasi bahwa anda memiliki akses tertentu ( Hak Akses )
   
-2. JWT        : Sebuah token berbentuk JSON yang berguna untuk melakukan sistem autentikasi atau pertukaran informasi
+2. JWT        : Sebuah token berbentuk yang berguna untuk melakukan sistem autentikasi atau pertukaran informasi
 
 3. CORS       : Protokol yang dibangun di atas HTTP untuk memungkinkan javascript pada halaman yang berasal dari satu situs untuk mengakses metode di situs lain
 
