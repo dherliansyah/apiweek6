@@ -34,6 +34,10 @@ Saya sedang membuat project minggu ke enam yaitu membuat API untuk webiste <b><i
 
 1. Postman
 
+### # DOKUMEN POSTMAN
+
+https://documenter.getpostman.com/view/12574221/TVRoYmwN
+
 ### # PROJECT ZWALLET
 
 ~$ git clone https://github.com/dherliansyah/apiweek6
