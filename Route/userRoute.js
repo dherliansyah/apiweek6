@@ -2,11 +2,11 @@ const userRoute = require("express").Router();
 const userController = require("../Controller/User");
 const middlewareVerify = require("../Helper/Middleware");
 
-userRoute.get("/", middlewareVerify,userController.getAllUsers);
-userRoute.get("/:idUser",middlewareVerify,userController.getUser);
-userRoute.post("/createuser", middlewareVerify,userController.postUser);
-userRoute.put("/:idUser", middlewareVerify,userController.puthUser);
-userRoute.delete("/:idUser", middlewareVerify,userController.deletehUser);
-userRoute.get("/", middlewareVerify,userController.paginationUser);
+// userRoute.get("/", middlewareVerify.otentication, userController.getAllUsers);
+userRoute.get("/:idUser", middlewareVerify.otentication, middlewareVerify.otoritation, userController.getUser);
+userRoute.post("/createuser", middlewareVerify.otentication, middlewareVerify.otoritation,userController.postUser);
+userRoute.put("/:idUser", middlewareVerify.otentication, middlewareVerify.otoritation, userController.puthUser);
+userRoute.delete("/:idUser", middlewareVerify.otentication, middlewareVerify.otoritation,userController.deletehUser);
+userRoute.get("/", middlewareVerify.otentication, userController.paginationUser);
 
 module.exports = userRoute;

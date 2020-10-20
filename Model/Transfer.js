@@ -51,9 +51,22 @@ const transferModel = {
       })
   },
 
-  searchTransfer:(body, firstname)=>{
+  searchTransfer:(body, firstname, page, limit)=>{
       return new Promise((resolve,reject)=>{
-          const query = `SELECT * FROM user WHERE firstName LIKE '%${firstname}%' ORDER BY firstname asc`
+
+        if(!limit){
+            limit = 4;
+        }else{
+            limit = parseInt(limit)
+        }
+
+        if(!page){
+            page = 1;
+        }else{
+            page = parseInt(page)
+        }
+
+          const query = `SELECT * FROM user WHERE firstName LIKE '%${firstname}%' ORDER BY firstname asc Limit ${limit} OFFSET ${(page-1)*limit}`
           db.query(query,body, (err,data)=>{
               if(!err){
                   resolve(data)

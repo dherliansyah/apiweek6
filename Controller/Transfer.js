@@ -75,9 +75,9 @@ module.exports = {
     },
 
     searchTransfer: (req,res)=>{
-      const { firstname } = req.query
+      const { firstname, page, limit } = req.query
       transferModel
-      .searchTransfer(req.body, firstname)
+      .searchTransfer(req.body, firstname, page, limit)
       .then((data)=>{
         res.status(200).send({
           success : true,
