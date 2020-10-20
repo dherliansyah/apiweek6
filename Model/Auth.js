@@ -40,6 +40,7 @@ const authModel = {
               {
                 role : data.role,
                 idUser: data.idUser,
+                firstName: data.firstName,
               },
               process.env.DATA_KEY
             );
