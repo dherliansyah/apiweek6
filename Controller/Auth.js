@@ -28,7 +28,7 @@ module.exports = {
         res.status(201).send({
           success: true,
           message: "Success Login",
-          token: dataLogin,
+          data: dataLogin,
         });
       })
       .catch((err) => {

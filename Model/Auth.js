@@ -38,32 +38,31 @@ const authModel = {
           if (!err) {
             const token = jwt.sign(
               {
-                role : data.role,
+                role: data.role,
                 idUser: data.idUser,
                 firstName: data.firstName,
               },
               process.env.DATA_KEY
             );
-            
-            bcrypt.compare(password, data.password, (err, result)=>{
-              if(err){
-                reject()
-              }else{
-                if(!result){
-                  reject()
-                }else{
+
+            bcrypt.compare(password, data.password, (err, result) => {
+              if (err) {
+                reject();
+              } else {
+                if (!result) {
+                  reject();
+                } else {
                   const sql = "SELECT * FROM user WHERE password=?";
-                  db.query(sql, data.password, (err)=>{
-                    if(!err){
-                      resolve(token)
-                    } else{
-                      reject()
+                  db.query(sql, data.password, (err) => {
+                    if (!err) {
+                      resolve({ token, role: data.role, idUser: data.idUser });
+                    } else {
+                      reject();
                     }
-                  })
+                  });
                 }
               }
-            })
-
+            });
           } else {
             reject();
           }

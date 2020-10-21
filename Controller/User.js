@@ -20,7 +20,8 @@ module.exports = {
   },
 
   getUser: (req, res) => {
-    const { idUser } = req.params;
+    // const { idUser } = req.params;
+    const {idUser} = req.decoded
     userModel
       .getUser(req.body, idUser)
       .then((data) => {

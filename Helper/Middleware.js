@@ -9,11 +9,11 @@ module.exports = {
     if(!bearearToken){
       res.status(401).send({
         success : false,
-        message : "NOT FOUND",
+        message : "gagal cuyy",
       })
     }else{
-      const token = bearearToken.split(" ")[1];
-      jwt.verify(token, process.env.DATA_KEY,(err, decoded)=>{
+      // const token = bearearToken.split(" ")[1];
+      jwt.verify(bearearToken, process.env.DATA_KEY,(err, decoded)=>{
         if(err){
           res.status(401).send({
             success: false,
@@ -29,8 +29,9 @@ module.exports = {
 
   otoritation : (req, res, next) =>{
     const role = req.decoded.role;
+    // console.log(role)
     const idUser = req.decoded.idUser
-    if(role == 20) next();
+    if(role == "admin") next();
     else if(idUser == req.params.idUser) next();
     else{
       res.status(401).send({
