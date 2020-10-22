@@ -40,6 +40,7 @@ module.exports = {
   },
 
   postUser: (req, res) => {
+    req.body.photo = (req.file ? req.file.filename : '');
     userModel
       .postUser(req.body)
       .then((data) => {
@@ -59,6 +60,7 @@ module.exports = {
 
   puthUser: (req, res) => {
     const { idUser } = req.params;
+    req.body.photo = (req.file ? req.file.filename : '');
     userModel
       .puthUser(req.body, idUser)
       .then((data) => {
@@ -71,7 +73,7 @@ module.exports = {
       .catch((err) => {
         res.status(400).send({
           success: false,
-          message: "Failed Update Data USer",
+          message: "Failed Update Data User",
         });
       });
   },

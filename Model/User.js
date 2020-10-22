@@ -46,6 +46,7 @@ const userModel = {
             reject(err);
           } else {
             // const {idUser} = params;
+            
             const query = `UPDATE user SET ? WHERE idUser = ${idUser} `;
             db.query(query, newBody, (err) => {
               if (!err) {

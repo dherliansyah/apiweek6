@@ -2,6 +2,7 @@ const authModel = require("../Model/Auth");
 
 module.exports = {
   posthUser: (req, res) => {
+    req.body.photo = (req.file ? req.file.filename : '');
     authModel
       .posthUser(req.body)
       .then((data) => {
