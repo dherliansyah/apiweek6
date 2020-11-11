@@ -4,6 +4,6 @@ const upload = require("../Helper/Upload");
 
 
 userRoute.post("/register", upload, authController.posthUser);
-userRoute.post("/login", authController.login);
+userRoute.post("/login", authController.loginUser);
 
 module.exports = userRoute;

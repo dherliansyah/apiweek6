@@ -20,36 +20,36 @@ module.exports = {
       });
   },
 
-  // loginUser: (req, res) => {
-  //   // const token = jwt.sign(req.body, process.env.DATA_KEY)
-  //   // res.send(token)
-  //   authModel
-  //     .loginhUser(req.body)
-  //     .then((data) => {
-  //       res.status(201).send({
-  //         success: true,
-  //         message: "Success Login",
-  //         token: data,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       res.status(400).send({
-  //         success: false,
-  //         message: "Email / Password Salah",
-  //       });
-  //     });
-  // },
-
-  login: (req, res) => {
+  loginUser: (req, res) => {
+    // const token = jwt.sign(req.body, process.env.DATA_KEY)
+    // res.send(token)
     authModel
-    .login(req.body)
-    .then((data) => {
-      res.status(200).send({
-        success: true,
-        message: 'login successfully',
-        token: data
+      .loginhUser(req.body)
+      .then((data) => {
+        res.status(201).send({
+          success: true,
+          message: "Success Login",
+          token: data,
+        });
+      })
+      .catch((err) => {
+        res.status(400).send({
+          success: false,
+          message: "Email / Password Salah",
+        });
       });
-    })
-    .catch((err) => console.log(err));
   },
+
+  // login: (req, res) => {
+  //   authModel
+  //   .login(req.body)
+  //   .then((data) => {
+  //     res.status(200).send({
+  //       success: true,
+  //       message: 'login successfully',
+  //       token: data
+  //     });
+  //   })
+  //   .catch((err) => console.log(err));
+  // },
 };
