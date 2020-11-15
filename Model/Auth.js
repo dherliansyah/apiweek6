@@ -101,7 +101,7 @@ const authModel = {
                   const sql = "SELECT * FROM user WHERE password=?";
                   db.query(sql, data.password, (err) => {
                     if (!err) {
-                      resolve({ token, role: data.role, idUser: data.idUser });
+                      resolve({ token, role: data.role, idUser: data.idUser, username: data.username });
                     } else {
                       reject();
                     }

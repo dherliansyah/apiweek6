@@ -58,11 +58,55 @@ module.exports = {
       });
   },
 
-  puthUser: (req, res) => {
-    const { idUser } = req.params;
-    req.body.photo = (req.file ? req.file.filename : '');
+  // puthUser: (req, res) => {
+  //   const { idUser } = req.params;
+  //   req.body.photo = (req.file ? req.file.filename : '');
+  //   userModel
+  //     .puthUser(req.body, idUser)
+  //     .then((data) => {
+  //       res.status(200).send({
+  //         success: true,
+  //         message: "Success Update Data User",
+  //         data: data,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       res.status(400).send({
+  //         success: false,
+  //         message: "Failed Update Data User",
+  //       });
+  //     });
+  // },
+
+  // patchProfile: (req, res) => {
+  //   userModel
+  //     .patchProfile(req.body, req.params.idUser)
+  //     .then((data) => {
+  //       if (data.length == 0) {
+  //         res.status(400).send({
+  //           success: false,
+  //           message: "Id Not Found",
+  //           data: data,
+  //         });
+  //       } else {
+  //         res.status(200).send({
+  //           success: true,
+  //           message: "Success Update Data Profile",
+  //           data: data,
+  //         });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       res.send({
+  //         success: false,
+  //         mesage: err.message,
+  //       });
+  //     });
+  // },
+
+  updateUser: (req, res) => {
     userModel
-      .puthUser(req.body, idUser)
+      .updateUser(req.params, req.body)
       .then((data) => {
         res.status(200).send({
           success: true,
