@@ -25,11 +25,11 @@ module.exports = {
     // res.send(token)
     authModel
       .loginhUser(req.body)
-      .then((data) => {
+      .then((token) => {
         res.status(201).send({
           success: true,
           message: "Success Login",
-          token: data,
+          token: token,
         });
       })
       .catch((err) => {

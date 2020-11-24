@@ -76,22 +76,5 @@ const transferModel = {
 //           })
 //       })
 //   },
-
-  searchTransfer:(body, firstname)=>{
-    return new Promise((resolve,reject)=>{
-
-        const query = `SELECT * FROM user WHERE firstName LIKE '%${firstname}%' ORDER BY firstname ASC`
-        db.query(query,body, (err,data)=>{
-            if(!err){
-                resolve(data)
-            }else{
-                reject(err)
-            }
-        })
-    })
-},
 }
-
-
-
 module.exports = transferModel;

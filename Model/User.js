@@ -13,6 +13,32 @@ const userModel = {
     });
   },
 
+  searchAll: (idUser) => {
+    return new Promise((resolve, reject) => {
+      db.query("SELECT * FROM user WHERE idUser <> ? ORDER BY firstName ASC", idUser, (err, res) => {
+        if (!err) {
+          resolve(res);
+        }
+        reject(err);
+      });
+    });
+  },
+
+  searchUser: function (query, idUser) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `SELECT * FROM user WHERE username LIKE '%${query}%' AND idUser <> ${idUser} ORDER BY firstName ASC`,
+        (err, result) => {
+          if (!err) {
+            resolve(result);
+          } else {
+            reject(new Error(err));
+          }
+        }
+      );
+    });
+  },
+
   postUser: (body) => {
     return new Promise((resolve, reject) => {
       bcrypt.genSalt(5, function (err, salt) {
@@ -97,60 +123,18 @@ const userModel = {
     });
   },
 
-  // patchProfile: (body, idUser) => {
-  //   return new Promise((resolve, reject) => {
-  //     bcrypt.genSalt(5, function (err, salt) {
-  //     const {
-  //       firstName,
-  //       lastName,
-  //       username,
-  //       email,
-  //       password,
-  //       phone,
-  //       balance,
-  //       verified,
-  //       photo,
-  //       pin,
-  //       role,
-  //     } = body;
-
-  //       bcrypt.hash(password, salt, function (err, hashedPassword) {
-  //       const newBody = { ...body, password: hashedPassword };
-  //       console.log(newBody);
-  //       if (err) {
-  //         reject(err);
-  //       }
-  //       db.query(
-  //         `SELECT * FROM user WHERE idUser=${idUser}`,
-  //         body,
-  //         (err, result) => {
-  //           if (!err) {
-  //             if (result.length) {
-  //               const data = Object.entries(body).map((item) => {
-  //                 return parseInt(item[1]) > 0
-  //                   ? `${item[0]}=${item[1]}`
-  //                   : `${item[0]}='${item[1]}'`;
-  //               });
-  //               const query = `UPDATE user SET ${data} WHERE idUser=${idUser}`;
-  //           db.query(query, newBody, (err) => {
-  //             if (data) {
-  //               resolve(newBody);
-  //             } else {
-  //               reject(err);
-  //             }
-  //           });
-  //             } else {
-  //               reject("id not found");
-  //             }
-  //           } else {
-  //             reject("Failed update Profile");
-  //           }
-  //         }
-  //       );
-  //     });
-  //   });
-  //   });
-  // },
+  updatePin: (idUser, pin) => {
+    return new Promise((resolve, reject) => {
+      const query = `UPDATE user SET pin= ${pin} WHERE idUser=${idUser} `;
+      db.query(query, (err) => {
+        if (!err) {
+          resolve(resolve);
+        } else {
+          reject(reject);
+        }
+      });
+    });
+  },
 
   getUser: (body, idUser) => {
     return new Promise((resolve, reject) => {
@@ -178,31 +162,64 @@ const userModel = {
     });
   },
 
-  paginationUser: (body, page,limit)=>{
-    return new Promise((resolve,reject)=>{
-      
-      if(!limit){
-        limit = 4;
-      }else{
-        limit = parseInt(limit);
-      }
-
-      if(!page){
-        page =1;
-      }else{
-        page = parseInt(page);
-      }
-
-      const query = `SELECT * FROM user LIMIT ${limit} OFFSET ${(page-1)*limit}`
-      db.query(query,body, (err,res)=>{
-        if(!err){
-          resolve(res)
-        }else{
-          reject(err)
+  updatePhone: (idUser, phone) => {
+    return new Promise((resolve, reject) => {
+      const query = `UPDATE user SET phone= ${phone} WHERE idUser=${idUser} `;
+      db.query(query, (err) => {
+        if (!err) {
+          resolve(resolve);
+        } else {
+          reject(reject);
         }
-      })
-    })
+      });
+    });
   },
+
+  nameUpdate: (idUser, username) => {
+    return new Promise((resolve, reject) => {
+      const query = `UPDATE user SET username='${username}' WHERE idUser=${idUser} `;
+      db.query(query, (err) => {
+        if (!err) {
+          resolve(resolve);
+        } else {
+          reject(reject);
+        }
+      });
+    });
+  },
+
+ uploadPhoto: (params, body) => {
+    const { photo } = body;
+    const { idUser } = params;
+    return new Promise((resolve, reject) => {
+      db.query(
+        `SELECT photo FROM user WHERE idUser=${idUser}`,
+        (err, res) => {
+          if (!err) {
+            const data = Object.entries(body).map((item) => {
+              return parseInt(item[1]) 
+                ? `${item[0]} = ${item[1]}`
+                : `${item[0]} = ${item[1]}`;
+            });
+
+            db.query(
+              `UPDATE user SET photo = '${photo}' WHERE idUser=${idUser}`,
+              (err, res) => {
+                if (!err) {
+                  resolve(res);
+                } else {
+                  reject(err);
+                }
+              }
+            );
+          } else {
+            reject(err);
+          }
+        }
+      );
+    });
+  },
+
 };
 
 module.exports = userModel;

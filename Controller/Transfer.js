@@ -92,26 +92,5 @@ module.exports = {
     //     })
     //   })
     // }
-
-    searchTransfer: (req,res)=>{
-      const { firstname } = req.query
-      transferModel
-      .searchTransfer(req.body, firstname)
-      .then((data)=>{
-        res.status(200).send({
-          success : true,
-          message : "Success Search Data Transfer",
-          data : data,
-        })
-      })
-      .catch((err)=>{
-        res.status(400).send({
-          success : false,
-          message : "Failed Search Data Transfer",
-        })
-      })
-    }
-  
-
   };
   
