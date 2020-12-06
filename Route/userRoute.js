@@ -7,6 +7,7 @@ userRoute.get("/", middlewareVerify.otentication, userController.getAllUsers);
 userRoute.get("/searchall", middlewareVerify.otentication, userController.searchAll);
 userRoute.get("/search/query", middlewareVerify.otentication, userController.searchUser);
 userRoute.get("/:idUser", middlewareVerify.otentication, middlewareVerify.otoritation, userController.getUser);
+userRoute.get("/searchquery/username", middlewareVerify.otentication, userController.getUserSearch)
 userRoute.post("/createuser",middlewareVerify.otentication, middlewareVerify.otoritation,userController.postUser);
 userRoute.patch("/phone/:idUser",middlewareVerify.otentication, middlewareVerify.otoritation,userController.updatePhone);
 userRoute.patch("/username/:idUser",middlewareVerify.otentication, middlewareVerify.otoritation,userController.nameUpdate);

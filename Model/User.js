@@ -220,6 +220,25 @@ const userModel = {
     });
   },
 
+  getUserSearch: (body, username, page, limit) => {
+    return new Promise((resolve, reject) => {
+        if(!limit) limit = 4;
+        else limit = parseInt(limit);
+
+        if(!page) page = 1;
+        else page = parseInt(page);
+        const query = `SELECT * FROM user WHERE username LIKE '%${username}%%' ORDER BY username ASC LIMIT ${limit} OFFSET ${(page-1) * limit}`
+                      //  SELECT * FROM user WHERE username LIKE '%${query}%' AND idUser <> ${idUser} ORDER BY firstName ASC
+        db.query(query, body, (err, res)=> {
+            if(!err) {
+                resolve(res)
+            } else {
+                reject(err.message)
+            }
+        })
+    })
+},
+
 };
 
 module.exports = userModel;

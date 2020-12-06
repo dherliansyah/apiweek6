@@ -255,4 +255,23 @@ module.exports = {
         });
       }
     },
+
+    getUserSearch: (req, res) => {
+      const {username, page, limit} = req.query
+      userModel
+      .getUserSearch(req.body, username, page, limit)
+      .then((data) => {
+        res.status(200).send({
+          success: true,
+          message: "Success search User",
+          data: data,
+        });
+      })
+        .catch((err) => {
+          res.send({
+            success: false,
+            message: 'failed search name and short'
+          })
+        });
+    },
 };
