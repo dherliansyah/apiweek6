@@ -1,5 +1,5 @@
 const db = require("../Helper/db");
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 
 const userModel = {
   getAllUsers: () => {
@@ -41,9 +41,9 @@ const userModel = {
 
   postUser: (body) => {
     return new Promise((resolve, reject) => {
-      bcrypt.genSalt(5, function (err, salt) {
+      bcryptjs.genSalt(5, function (err, salt) {
         const { password } = body;
-        bcrypt.hash(password, salt, function (err, hashedPassword) {
+        bcryptjs.hash(password, salt, function (err, hashedPassword) {
           const newBody = { ...body, password: hashedPassword };
           if (err) {
             reject(err);
@@ -64,9 +64,9 @@ const userModel = {
 
   // puthUser: (body, idUser) => {
   //   return new Promise((resolve, reject) => {
-  //     bcrypt.genSalt(5, function (err, salt) {
+  //     bcryptjs.genSalt(5, function (err, salt) {
   //       const { password } = body;
-  //       bcrypt.hash(password, salt, function (err, hashedPassword) {
+  //       bcryptjs.hash(password, salt, function (err, hashedPassword) {
   //         const newBody = { ...body, password: hashedPassword };
   //         if (err) {
   //           reject(err);
@@ -92,10 +92,10 @@ const userModel = {
     return new Promise((resolve, reject) => {
         console.log(body.password.length)
       if (body.password.length > 0 || body.pin.length > 0) {
-        bcrypt.genSalt(10, function (err, salt) {
+        bcryptjs.genSalt(10, function (err, salt) {
           //start hash password
           const { password } = body;
-          bcrypt.hash(password, salt, function (err, hashedPassword) {
+          bcryptjs.hash(password, salt, function (err, hashedPassword) {
             const newBody = { ...body, password: hashedPassword };
             if (err) {
               reject(err);

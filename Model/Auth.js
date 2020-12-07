@@ -1,13 +1,13 @@
 const db = require("../Helper/db");
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const authModel = {
   posthUser: (body) => {
     return new Promise((resolve, reject) => {
-      bcrypt.genSalt(5, function (err, salt) {
+      bcryptjs.genSalt(5, function (err, salt) {
         const { password } = body;
-        bcrypt.hash(password, salt, function (err, hashedPassword) {
+        bcryptjs.hash(password, salt, function (err, hashedPassword) {
           const newBody = { ...body, password: hashedPassword };
           if (err) {
             reject(err);
@@ -46,7 +46,7 @@ const authModel = {
 //                     }, process.env.DATA_KEY)
 
 //                     //untuk mengecek
-//                     bcrypt.compare(password, dataUser.password, function(err, result) {
+//                     bcryptjs.compare(password, dataUser.password, function(err, result) {
 //                         if(err) {
 //                             reject('password is wrong')
 //                         } else {
@@ -91,7 +91,7 @@ const authModel = {
               process.env.DATA_KEY
             );
 
-            bcrypt.compare(password, data.password, (err, result) => {
+            bcryptjs.compare(password, data.password, (err, result) => {
               if (err) {
                 reject();
               } else {
